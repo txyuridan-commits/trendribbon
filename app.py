@@ -183,10 +183,19 @@ div[data-testid="stMetric"]{background:#f5f7f8;padding:12px;border-radius:12px}
 </style>
 """, unsafe_allow_html=True)
 
+# 修复首页快捷导航
+if "nav_target" in st.session_state:
+    st.session_state["page_nav"] = st.session_state.pop("nav_target")
+
 with st.sidebar:
     st.markdown("## 🧵 TrendRibbon")
     st.caption("AI Fashion Trims Development Studio")
-    page = st.radio("工作台", ["Dashboard","新品开发","客户需求方案","趋势调研","产品库","历史记录","知识库","设置"], label_visibility="collapsed")
+    page = st.radio(
+        "工作台",
+        ["Dashboard","新品开发","客户需求方案","趋势调研","产品库","历史记录","知识库","设置"],
+        label_visibility="collapsed",
+        key="page_nav"
+    )
     st.divider()
     st.caption("开发原则")
     st.caption("AI 建议 ≠ 工厂已验证工艺")
